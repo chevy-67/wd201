@@ -1,5 +1,5 @@
 function helo(){
-    console.log("Hello Node.js...")
+    console.log("Hello Motto")
 }
 
 helo()
