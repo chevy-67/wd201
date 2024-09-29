@@ -1,5 +1,5 @@
 function helo(){
-    console.log("Hello Motto")
+    console.log("Hello GitHub!")
 }
 
 helo()
