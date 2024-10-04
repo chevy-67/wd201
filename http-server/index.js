@@ -1,18 +1,18 @@
 const fs = require("fs");
 const http = require("http");
 
-const minimist = require('minimist')
-const args = minimist(process.argv.slice(2))
+const minimist = require("minimist");
+//const args = minimist(process.argv.slice(2));
 
-const port = minimist(process.argv.slice(2),{
-  default : {
-    port : 3000,
+const port = minimist(process.argv.slice(2), {
+  default: {
+    port: 3000,
   },
-})
+});
 
-homeContent = "";
-projectContent = "";
-registryContent = "";
+let homeContent = "";
+let projectContent = "";
+let registration_html = "";
 
 fs.readFile("home.html", (err, home) => {
   if (err) {
@@ -32,24 +32,26 @@ fs.readFile("registration.html", (err, registration) => {
   if (err) {
     throw err;
   }
-  registryContent = registration;
+  registration_html = registration;
 });
 
 http
-  .createServer((req, res) => {
-    const url = req.url;
+  .createServer((request, response) => {
+    let url = request.url;
+    response.writeHeader(200, { "Content-type": "text/html" });
     switch (url) {
       case "/project":
-        res.write(projectContent);
-        res.end();
+        response.write(projectContent);
+        response.end();
         break;
       case "/registration":
-        res.write(registryContent);
-        res.end();
+        response.write(registration_html);
+        response.end();
         break;
       default:
-        res.write(homeContent);
-        res.end();
+        response.write(homeContent);
+        response.end();
+        break;
     }
   })
   .listen(port);
