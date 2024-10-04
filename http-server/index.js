@@ -2,7 +2,7 @@ const fs = require("fs");
 const http = require("http");
 
 const minimist = require("minimist");
-//const args = minimist(process.argv.slice(2));
+const args = minimist(process.argv.slice(2));
 
 const port = minimist(process.argv.slice(2), {
   default: {
